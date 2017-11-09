@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/ionic/1.3.2/js/ionic.bundle.min.js"></script>
+		<title></title>
+		<script type="text/javascript">
+			document.addEventListener('plusready', function() {
+				//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+
+			});
+		</script>
+	</head>
+
+	<body ng-controller="MyCtrl">
+		<ion-header-bar align-title="center" class="bar-positive">
+			<div class="buttons">
+				<button class="button button-icon icon ion-ios-minus-outline" ng-click="data.showDelete = !data.showDelete;data.showReorder=false"></button>
+			</div>
+			<h1 class="title">Ionic Delete/Option Buttons</h1>
+			<div class="buttons">
+				<button class="button" ng-click="data.showReorder = !data.showReorder;">Reorder</button>
+			</div>
+		</ion-header-bar>
+		<ion-content>
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			<ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+				<ion-item ng-repeat="item in items" item="item" href="#/item/{{item.id}}" class="item-remove-animate" ng-click="hello(item)">
+					Item {{ item.id }}
+					<ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)">
+					</ion-delete-button>
+					<ion-option-button class="button-assertive" ng-click="edit(item)">
+						Edit
+					</ion-option-button>
+					<ion-option-button class="button-calm" ng-click="share(item)">
+						Share
+					</ion-option-button>
+					<ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
+						</ion-reorder>
+				</ion-item>
+
+			</ion-list>
+		</ion-content>
+		<script>
+			angular.module('ionicApp', ['ionic'])
+				.run(function($ionicPlatform) {
+					$ionicPlatform.ready(function() {
+						// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+						// for form inputs)
+						if(window.cordova && window.cordova.plugins.Keyboard) {
+							cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+						}
+						if(window.StatusBar) {
+							StatusBar.styleDefault();
+						}
+					});
+				})
+				.controller('MyCtrl',['$scope','$timeout' ,'$http',function($scope,$timeout,$http){
+					$scope.data = {
+						showDelete: false,
+						//showReorder: false
+					};
+					$scope.hello = function(item) {
+						alert('hello: ' + 'item' + item.id);
+					}
+					$scope.onItemDelete = function(item) {
+						$scope.items.splice($scope.items.indexOf(item), 1);
+					};
+					$scope.moveItem = function(item, fromIndex, toIndex) {
+						//把该项移动到数组中
+						$scope.items.splice(fromIndex, 1);
+						$scope.items.splice(toIndex, 0, item);
+					};
+					$scope.edit = function(item) {
+						alert('Edit Item: ' + item.id);
+					};
+					$scope.share = function(item) {
+						alert('Share Item: ' + item.id);
+					};
+					$scope.doRefresh = function() {
+						$http.get('json/item.json') //注意改为自己本站的地址，不然会有跨域问题
+							.success(function(newItems) {
+								//下拉 加载更多 对象拼接成新对象数组
+								//$scope.items=$scope.items.concat(newItems);
+								$scope.items = newItems;
+							})
+							.finally(function() {
+								$scope.$broadcast('scroll.refreshComplete');
+							});
+					};
+					$scope.items = [{
+							id: 0
+						},
+						{
+							id: 1
+						},
+						{
+							id: 2
+						},
+						{
+							id: 3
+						},
+						{
+							id: 4
+						},
+						{
+							id: 5
+						},
+						{
+							id: 6
+						},
+						{
+							id: 7
+						},
+						{
+							id: 8
+						},
+						{
+							id: 9
+						},
+						{
+							id: 10
+						}
+					];
+
+				   }])
+		</script>
+	</body>
+
+</html>
