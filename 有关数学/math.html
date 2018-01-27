@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function getN(m){
+				var n =0;
+				while(m>0) m -= ++n**3;
+				return m? -1 : n;
+			}
+			console.log(getN(4183059834009))
+			function getNbyM(m){
+				//返回m的平方根
+				var s = 1+4*1*2*Math.sqrt(m);
+				
+				if(s<=0){return -1}
+				
+				var r1 = (-1+Math.sqrt(s))/2;
+				var r2 = (-1-Math.sqrt(s))/2;
+				
+				if(r1>0 && isInteger(r1)){
+					return r1;
+				}
+				if(r2>0 && isInteger(r2)){
+					return r2;
+				}
+				return -1;
+			}
+			function isInteger(n){
+				//向下取整
+				return Math.floor(n)  === n;
+			}
+			console.log(getNbyM(4183059834009))
+		</script>
+	</body>
+</html>
