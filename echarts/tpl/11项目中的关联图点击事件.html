@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>关联图（关系图）--家庭关系图</title>
+		<link rel="stylesheet" href="../css/01.css" />
+		<script type="text/javascript" src="../js/echarts.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div class="box">
+			<p>说明：echarts3中x的点击事件与行为</p>
+			<p>
+				在ECharts中主要通过 on 方法添加事件处理函数，ECharts中的事件主要分为两种:<br/>
+				<ol>
+					<li>鼠标事件，在鼠标click or hover 时触发鼠标事件；</li>
+					<li>另外一种是在ECharts在做图形交互时触发的事件，即调用 dispatchAction 后触发的事件。</li>
+				</ol>
+				<p>鼠标事件：'click'，'dblclick'，'mousedown'，'mouseup'，'mouseover'，'mouseout'，'globalout'。</p>
+				<p>demo:<br/> myChart.on('click', function (params) { console.log(params); });
+				</p>
+				<p>
+					事件触发的参数为对象数据的各个属性，列出部分主要的属性：</p>
+				{<br /> // 当前点击的图形元素所属的组件名称，<br /> // 其值如 'series'、'markLine'、'markPoint'、'timeLine' 等。<br /> componentType: string,<br /> // 系列类型。值可能为：'line'、'bar'、'pie' 等。当 componentType 为 'series' 时有意义。<br /> seriesType: string,<br /> // 系列在传入的 option.series 中的 index。当 componentType 为 'series' 时有意义。<br /> seriesIndex: number,<br /> // 系列名称。当 componentType 为 'series' 时有意义。<br /> seriesName: string,<br /> // 数据名，类目名<br /> name: string,<br /> // 数据在传入的 data 数组中的 index<br /> dataIndex: number,<br /> // 传入的原始数据项<br /> data: Object,<br /> // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，<br /> // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。<br /> // 其他大部分图表中只有一种 data，dataType 无意义。<br /> dataType: string,<br /> // 传入的数据值<br /> value: number|Array<br /> // 数据图形的颜色。当 componentType 为 'series' 时有意义。<br /> color: string<br /> }
+				<br />
+				<p>
+					上面的点击事件参数，只是列出部分，不同的事件也有一些额外附加参数。<br /> 可以通过jq 的遍历查看他的参数属性$.each(params, function(k,v){ console.log( 'k='+k+':v=' + v) });
+				</p>
+				<p>图例交互事件：
+					<a href="http://echarts.baidu.com/api.html#action.legend.legendSelect">api文档链接</a>
+				</p>
+				<ol>
+					<li>legendselectchanged : 切换图例选中状态后的事件 (注：图例组件用户切换图例开关会触发该事件,不管你有没有选择，点击了就触发)</li>
+					<li>legendselected：例组件用legendSelect 图例选中后的事件，即点击显示该图例时，触发就生效。</li>
+					<li>legendunselected： legendUnSelect 图例取消选中后的事件。</li>
+					<li>datazoom：数据区域缩放后的事件。缩放视觉映射组件。</li>
+					<li>datarangeselected：selectDataRange 视觉映射组件中，range 值改变后触发的事件。</li>
+					<li>timelinechanged：timelineChange 时间轴中的时间点改变后的事件。</li>
+					<li>timelineplaychanged：timelinePlayChange 时间轴中播放状态的切换事件。</li>
+					<li>restore： restore 重置 option 事件。</li>
+					<li>dataviewchanged：工具栏中数据视图的修改事件。</li>
+					<li>magictypechanged：工具栏中动态类型切换的切换事件。</li>
+					<li>geoselectchanged：geo 中地图区域切换选中状态的事件（用户点击选中会触发该事件。）。</li>
+					<li>geoselected：geo 中地图区域选中后的事件（使用dispatchAction可触发此事件，用户点击不会触发此事件（用户点击事件请使用 geoselectchanged））。</li>
+					<li>geounselected：geo 中地图区域取消选中后的事件，使用dispatchAction可触发此事件，用户点击不会触发此事件（用户点击事件请使用 geoselectchanged）。</li>
+					<li>pieselectchanged：series-pie 中饼图扇形切换选中状态的事件，用户点击选中会触发该事件。</li>
+					<li>pieselected：series-pie 中饼图扇形选中后的事件，使用dispatchAction可触发此事件，用户点击不会触发此事件（用户点击事件请使用 pieselectchanged）。</li>
+					<li>pieunselected：series-pie 中饼图扇形取消选中后的事件，使用dispatchAction可触发此事件，用户点击不会触发此事件（用户点击事件请使用 pieselectchanged）</li>
+					<li>mapselectchanged： series-map 中地图区域切换选中状态的事件，用户点击选中会触发该事件。</li>
+					<li>mapselected：series-map 中地图区域选中后的事件，使用dispatchAction可触发此事件，用户点击不会触发此事件（用户点击事件请使用 mapselectchanged）。</li>
+					<li>mapunselected：series-map 中地图区域取消选中后的事件，使用dispatchAction可触发此事件，用户点击不会触发此事件（用户点击事件请使用 mapselectchanged）。</li>
+					<li>axisareaselected：平行坐标轴 (Parallel) 范围选取事件，</li>
+				</ol>
+			</p>
+			<p>
+				当进行坐标轴范围选取时，可以用如下方式获取当前高亮的线所对应的 data indices （即 series 的 data 中的序号列表）。
+			</p>
+			<p>
+				chart.on('axisareaselected', function () {<br /> var series1 = chart.getModel().getSeries()[0];<br /> var series2 = chart.getModel().getSeries()[0];<br /> var indices1 = series1.getRawIndicesByActiveState('active');<br /> var indices2 = series2.getRawIndicesByActiveState('active');<br /> console.log(indices1);
+				<br /> console.log(indices2);
+				<br /> });
+				<br />
+			</p>
+			<div id="main" style="width: 800px;height: 200px; margin-top: 20px;"></div>
+			<div>
+				姓名:<span id="name">未知</span><br /> value:
+				<span id="value">未知</span><br /> 类别:
+				<span id="category">未知</span>
+			</div>
+		</div>
+
+		<script src="../js/11.js"></script>
+	</body>
+
+</html>

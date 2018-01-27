@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>js删除数组里的某个元素</title>
+		<link rel="stylesheet" href="../css/01.css" />
+	</head>
+
+	<body>
+		<div class="box">
+			<p>js删除数组里的某个元素</p>
+			<p>1：根据数组下标删除特定元素</p>
+			<p>2：根据数组中元素值删除特定元素</p>
+			<p>说明：都是根据 splice方法进行操作，splice(参数1[index]，参数2[howmany]，参数n[item0....itemn])</p>
+			<p>参数1，参数2，必填项。参数1，删除元素的开始下标；参数2，删除元素的个数，0为不删除；参数n，可选。向数组添加的新项目。</p>
+		</div>
+		<script>
+			/* 
+			 * 方法:Array.remove(dx) 通过遍历,重构数组 
+			 * 功能:删除数组元素. 
+			 * 参数:dx--删除元素的下标. 
+			 */
+			Array.prototype.remove = function(dx) {
+				if(isNaN(dx) || dx > this.length) {
+					return false;
+				}
+				for(var i = 0, n = 0; i < this.length; i++) {
+					if(this[i] != this[dx]) {
+						/*this[n] = this[i];
+						n++;*/
+						this[n++] = this[i];
+					}
+				}
+				this.length -= 1;
+			}
+			a = ['1', '2', '3', '4', '5'];
+			alert("elements: " + a + "\nLength: " + a.length);
+			a.remove(1); //删除下标为1的元素 
+			alert("elements: " + a + "\nLength: " + a.length);
+			/* 
+			 * 方法:Array.baoremove(dx) 
+			 * 功能:删除数组元素. 
+			 * 参数:dx删除元素的下标. 
+			 * 返回:在原数组上修改数组. 
+			 */
+			Array.prototype.baoremove = function(dx) {
+				if(isNaN(dx) || dx > this.length) {
+					return false;
+				}
+				this.splice(dx, 1);
+			}
+			b = ['1', '2', '3', '4', '5'];
+			alert("elements: " + b + "\nLength: " + b.length);
+			b.baoremove(1); //删除下标为1的元素 
+			alert("elements: " + b + "\nLength: " + b.length);
+			/*	删除数组中的某个元素，首先需要确定需要删除元素的索引值。*/
+			var arr = [1, 5, 6, 12, 453, 324];
+
+			function indexOf(val) {
+				for(var i = 0; i < arr.length; i++) {
+					if(arr[i] == val) {
+						return i;
+					}
+				}
+				return -1;
+			}
+			/*找到相对应的索引值后，根据索引值删除数组中该元素对应的值*/
+			function remove(val) {
+				var index = indexOf(val);
+				if(index > -1) {
+					arr.splice(index, 1);
+				}
+			}
+			/*验证下，是否成功*/
+			alert(remove(1)); //测试OK。
+			/*需要将其封装为数组原始的方法，以便以后需要使用*/
+			Array.prototype.indexOf = function(val) {
+				for(var i = 0; i < this.length; i++) {
+					if(this[i] == val) {
+						return i;
+					}
+				}
+				return -1;
+			}
+			Array.prototype.remove = function(val) {
+				var index = this.indexOf(val);
+				if(index > -1) {
+					this.splice(index, 1);
+				}
+			}
+			var temp = [1, 5, 6, 12, 453, 324];
+			alert(temp.remove(12)); //测试OK
+			/*当然根据数组的splice() 方法：向/从数组中添加/删除项目，然后返回被删除的项目。可以实现替换数组中的某个值。*/
+		</script>
+	</body>
+
+</html>
