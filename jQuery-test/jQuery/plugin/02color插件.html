@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>编写color插件</title>
+		<script src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.color.js" ></script>
+	</head>
+	<body>
+		<p>你好</p>
+		<input type="text" value="" placeholder="输入正确的颜色"/>
+		<button onclick="change()">变色，变字</button>
+		<button onclick="font()">设置字体和颜色</button>
+		<script>
+			function change(){
+				var col = $("input").val();
+				//链式操作 color扩展插件 返回的是 jquery对象
+				$("p").color(col).html("你好吗");
+			}
+			function font(){
+				var fo ={
+					"size":"20px",
+					"family":"KaiTi"
+				}
+				$("p").font(fo).color($("input").val());
+			}
+		</script>
+	</body>
+</html>

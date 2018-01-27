@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div.box {
+				width: 80%;
+				margin: 100px auto;
+				background-color: #e2e2e2;
+			}
+			
+			div.comment {
+				width: 80%;
+				margin: 10px auto;
+				background-color: #ccc;
+			}
+			
+			.comment h6 {
+				font-weight: 700;
+				font-size: 14px;
+			}
+			
+			.para {
+				margin-top: 5px;
+				text-indent: 2em;
+				background: #ccc;
+			}
+		</style>
+		<script src="../../../js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div class="box">
+			<button onclick="loadJson()">获得json</button>
+			<p>for循环展示区</p>
+			<div id="showbox"></div>
+			<p>$.each(data.fn)展示区</p>
+			<div id="showbox1"></div>
+		</div>
+		<script>
+			function loadJson() {
+				$.getJSON('getJson.json', function(data, status) {
+					alert(status);
+					console.log(data);
+					for(var i = 0; i < data.length; i++) {
+						var showmag = "<div class='comment'><h6>姓名：" + data[i].name + "</h6><p class='para'>年龄：" + data[i].age + "</p></div>";
+						$("#showbox").append(showmag);
+					}
+					$.each(data, function(index,value) {
+						console.log(index);
+						console.log(value);
+						var showmag = "<div class='comment'><h6>姓名：" + value.name + "</h6><p class='para'>年龄：" + value.age + "</p></div>";
+						$("#showbox1").append(showmag);
+					});
+				});
+			}
+		</script>
+	</body>
+
+</html>

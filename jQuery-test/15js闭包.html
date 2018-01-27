@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js闭包问题</title>
+	</head>
+	<body>
+		<script>
+			//函数作为返回值 被调用
+			//打断点 看流程
+			//第一步 var f=fn();
+			//fn() --> max=10;[fn()作用域内]
+			//max=100;[全局]
+			//fn(15) --> x=15;max=10
+			//return 15
+			/*function fn(){
+				var max =10;
+				return function fx(x){
+					if(x>max){console.log(x);}
+				}
+			}
+			var f = fn()
+			,max =100;
+			f(15);
+			console.log(max);*/
+			//函数作为参数被调用
+			 function fn(x){
+			 	var max=10;
+			 	if(x>max){console.log(x);}
+			 }
+			 (function (ff){
+			 	var max =100;
+			 	ff(15);
+			 	console.log(max);
+			 })(fn);
+			 //函数 fn作为实参，传递到 匿名函数中，立即执行
+			 //
+		</script>
+	</body>
+</html>

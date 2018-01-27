@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>插件说明</title>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<p>jquery插件主要分为3中类型</p>
+		<p>封装对象的插件，例如addclass(),是针对对象的</p>
+		<p>封装全局函数的插件，例如ajax()、trim()，是全局的函数</p>
+		<p>封装选择器</p>
+		<p>jquery两个用于扩展功能的函数： jQuery.fn.extend() jQuery.extend()</p>
+		<p>说明：前者用于扩展封装对象的插件，后者用于另外两种类型；</p>
+		<p>两个方法接收一个object的参数；</p>
+		<p>object对象的键值对分别对应 函数或方法名 / 函数主体</p>
+		<script>
+			//jQuery.extend(target [,obj1] [objN]);
+			//若只有一个target 对象，则 返回的就是 jquery对象本身
+			//存在其他对象，则后面的对象属性会覆盖之前的，成为新的,会合并属性
+			//demo
+			//$.extend( [deep ], target, object1 [, objectN ] );
+			//deep boolean类型，不支持false，默认是false，当为true时，深度合并
+			//深度合并 
+			//如果多个对象的某个同名属性也都是对象，则该"属性对象"的属性也将进行合并。
+			var targetObj = {
+				"name": "xuefeiCheng",
+				"age": "23"
+			};
+			var obja = {
+				"name": "xuefei",
+				"age": "23"
+			};
+			var objb = {
+				"name": "Cheng",
+				"age": "22",
+				"sex": "girl"
+			};
+			var targetObja = {
+				"name": "xuefeiCheng",
+				"friend": {
+					"name": "f1",
+					"age": "13"
+				}
+			};
+			var objc = {
+				"name": "xuefei",
+				"age": "23",
+				"friend": {
+					"name": "f2",
+					"age": "14"
+				}
+			};
+			//console.log(jQuery.extend(targetObj));//ƒ (a,b){return new n.fn.init(a,b)}
+			//console.log(jQuery.extend(targetObj,obja));//{name: "xuefei", age: "23"}
+			//console.log(jQuery.extend(targetObj,objb,true));//{name: "Cheng", age: "22", sex: "girl"}
+			//console.log(jQuery.extend(targetObja, objc, true));
+			//{name: "xuefei", friend:{name: "f2", age: "14"}, age: "23"}
+			function foo(option) {
+				option = jQuery.extend({
+					//默认参数
+					"name": "河东勋",
+					"age": "33",
+					"sex": "man"
+				}, option);
+				return option;
+			}
+			var opt = {
+				"name": "xuefeicheng",
+				"age": "23",
+			}
+			console.log(foo(opt));
+		</script>
+	</body>
+
+</html>

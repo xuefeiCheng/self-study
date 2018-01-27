@@ -1,0 +1,155 @@
+###关于.siblings(selector)语法想说：
+获得的是 调用该语法对象的所有同胞，当然也可以在调用该语法的时候说明 selector选择器，来筛选。
+栗子：
+<ul>
+   <li>list item 1</li>
+   <li>list item 2</li>
+   <li class="third-item">list item 3</li>
+   <li>list item 4</li>
+   <li>list item 5</li>
+   <p>hahah</p>
+</ul>
+
+<script>
+$('li.third-item').siblings().css('background-color', 'red');
+</script>
+
+//结果是：
+list item 3的所有同胞 的css样式变更
+ 若script部分代码变更为 $('li.third-item').siblings('p').css('background-color', 'red');
+ //结果是：
+ list item 3的所有同胞中的p标签 的css样式变更
+ 
+###关于 tab切换想说：
+tab切换其实只要解决两个问题即可：
+索引问题，怎么把 标题和实际内容通过索引串联起来？
+样式问题，利用排他思想，给自己加样式，去掉除自己以外的同胞的样式。
+
+###关于 hide(),show()函数想说：
+hide和show方法是控制显示隐藏属性的，其实就是对块元素的display属性控制。
+在淘宝服饰精品广告栗子中，用到了这两个方法，罗列出一堆图片在中间middle块中，默认是overflow-hidden。
+然后控制，单个图片的显示隐藏，要先隐藏掉所有的，显示其中一个，然后就会填充在middle块中。
+
+
+###关于 效果方法  animate()想说：
+栗子：	$("button").click(function(){
+			$("#box").animate({height:"300px"});
+		});
+栗子解析：	点击button触发click内事件，事件执行一个效果，改变id为box的高度的一个动态过程。
+定义：	animate() 方法执行 CSS 属性集的自定义动画。
+		该方法通过 CSS 样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+		只有数字值可创建动画（比如 "margin:30px"）。字符串值无法创建动画（比如 "background-color:red"）。
+		提示：请使用 "+=" 或 "-=" 来创建相对动画。
+语法：	(selector).animate({styles},speed,easing,callback) 或者 (selector).animate({styles},{options})
+参数详解：	其中 style为必须，options为可选。options中包含speed,easing,callback,step,queue,specialEasing
+			speed - 设置动画的速度;可能的值：毫秒/"slow"/"fast"
+			easing - 规定要使用的 easing 函数;可能的值："swing" - 在开头/结尾移动慢，在中间移动快;"linear" - 匀速移动
+			callback - 规定动画完成之后要执行的函数
+			step - 规定动画的每一步完成之后要执行的函数
+			queue - 布尔值。指示是否在效果队列中放置动画。如果为 false，则动画将立即开始。
+			specialEasing - 来自 styles 参数的一个或多个 CSS 属性的映射，以及它们的对应 easing 函数
+			
+###关于 停止效果方法 stop() 想说：
+定义：	jQuery stop() 方法用于停止动画或效果，在它们完成之前。
+		stop() 方法适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。
+语法：	$(selector).stop(stopAll,goToEnd);
+参数详解：	可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。
+			可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false。
+			因此，默认地，stop() 会清除在被选元素上指定的当前动画。
+栗子：	在需要一次性清除扎堆的特效时，需要这些可选参数，不然，做个遍历清除，一旦stopAll = false，那根本停不下来啊。
+
+###关于 z-index 想说
+说明：	z-index属性目前只有在position:relative、position:absolute和position:fixed参与的情况下才有作用，
+		表示层级，类似photoshop中层级的概念。
+特殊栗子： 	有两个兄弟div，分别有一个孩子div。兄弟级别的定位是相对定位，儿子级别的定位是绝对定位。老大的z-index设置的是1，
+			老二的z-index设置的是2.老大家的孩子z-index是999，老二家的z-index是1；此时老二家的孩子在老大家孩子上面。
+			因为 老二 > 老大，即使 老大孩子 远大于 老二孩子，结果也不能改变。
+			
+###关于 eq()方法想说：
+
+定义：	eq() 方法返回被选元素中带有指定索引号的元素。
+		索引号从 0 开始，因此首个元素的索引号是 0 而不是 1
+用途：	获取特定索引号的元素。
+其他：	还有一个eq()选择器 $("p:eq(1)")
+栗子：	<script>
+			$(document).ready(function(){
+  				$("p").eq(1).css("background-color","yellow");
+			});
+		</script>
+
+		<body>
+
+		<p>菜鸟教程 (index 0).</p>
+		<p>http://www.runoob.com (index 1)。</p>
+		<p>google (index 2).</p>
+		<p>http://www.google.com (index 3)。</p>
+
+		</body>
+结果：	<p>http://www.runoob.com (index 1)。</p>此行样式变更
+
+
+####关于jQuery事件-- scroll() 方法想说
+
+定义：	当用户滚动指定的元素时，会发生 scroll 事件。
+		scroll 事件适用于所有可滚动的元素和 window 对象（浏览器窗口）。
+		scroll() 方法触发 scroll 事件，或规定当发生 scroll 事件时运行的函数。
+语法：	$(selector).scroll()
+栗子1:	$(window).scroll(function () {//操作});
+栗子2：	$("div").scroll(function() {
+  		$("span").text(x+=1);
+		});
+
+
+#### 关于 jQuery CSS 操作 - scrollTop() 方法 想说
+
+定义：	scrollTop() 方法返回或设置匹配元素的滚动条的垂直位置。
+		scroll top offset 指的是滚动条相对于其顶部的偏移。
+		如果该方法未设置参数，则返回以像素计的相对滚动条顶部的偏移。
+语法：	$(selector).scrollTop(offset)  //offset	可选。规定相对滚动条顶部的偏移，以像素计。
+栗子：	$(".btn1").click(function(){
+  		$("div").scrollLeft(100);
+		});
+		//  设置 滚动条的位置
+		
+		
+#### 关于 jQuery CSS 操作 - offset() 方法 想说
+
+##返回偏移量：
+定义：	offset() 方法返回或设置匹配元素相对于文档的偏移（位置）。
+		返回第一个匹配元素的偏移坐标。
+		该方法返回的对象包含两个整型属性：top 和 left，以像素计。此方法只对可见元素有效。
+语法1：	$(selector).offset()
+栗子：	$("#span1").text(x.left);
+   		$("#span2").text(x.top);
+##设置偏移量：	
+定义：设置所有匹配元素的偏移坐标。
+语法2：	$(selector).offset(value)
+参数说明：	必需。规定以像素计的 top 和 left 坐标。
+			可能的值：
+			值对，比如 {top:100,left:0}
+			带有 top 和 left 属性的对象
+栗子1：	$("p").offset({top:100,left:0});
+		$("p").offset({top:100});
+栗子2：	newPos=new Object();
+		newPos.left="0";
+		newPos.top="100";
+
+		$(document).ready(function(){
+  			$("button").click(function(){
+    			$("p").offset(newPos);
+  			});
+		});
+##使用函数来设置偏移坐标：
+定义：	使用函数来设置所有匹配元素的偏移坐标。
+语法：	$(selector).offset(function(index,oldoffset))
+参数说明：	规定返回被选元素新偏移坐标的函数。
+			index - 可选。接受选择器的 index 位置
+			oldvalue - 可选。接受选择器的当前坐标。
+栗子：	$("p").offset(function(n,c){
+    	newPos=new Object();
+        newPos.left=c.left+100;
+        newPos.top=c.top+100;
+        return newPos;
+    });
+
+

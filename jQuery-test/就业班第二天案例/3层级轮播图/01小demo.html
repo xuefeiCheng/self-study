@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>animate方法实现的特效demo</title>
+		<script src="../jquery-1.11.1.min.js"></script>
+		<style>
+			div.box {
+				width: 80%;
+				margin: 50px auto;
+				background-color: #eee;
+				padding: 20px;
+			}
+			
+			div.demo {
+				width: 200px;
+				height: 100px;
+				background-color: pink;
+				margin-top: 10px;
+				border: 1px solid #ccc;
+				position: relative;
+			}
+			
+			div.demo div {
+				width: 20px;
+				margin-right: 10px;
+				height: 50px;
+				background-color: #ccc;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<p>###此案例是使用 效果方法 animate()实现的</p>
+			<p>小demo</p>
+			<button onclick="move()">点击我，hight起来</button> <button onclick="stop()">点击我，Stop</button>
+			<div class="demo">
+				<div class="one"></div>
+				<div class="two"></div>
+				<div class="three"></div>
+				<div class="four"></div>
+				<div class="five"></div>
+				<div class="six"></div>
+			</div>
+		</div>
+		<script>
+			function stop() {
+				var divs = $("div.demo div");
+				for(var i = 0, le = divs.length; i < le; i++) {
+					$(divs[i]).stop(true);
+				}
+			}
+
+			function move() {
+				demoMove();
+
+				function demoMove() {
+					$("div.one").animate({
+						height: '30px'
+					}, 1000);
+					$("div.two").animate({
+						height: '78px'
+					}, 'slow');
+					$("div.three").animate({
+						height: '20px'
+					}, 500);
+					$("div.four").animate({
+						height: '66px'
+					}, 'slow');
+					$("div.five").animate({
+						height: '60px'
+					}, 500);
+					$("div.six").animate({
+						height: '23px'
+					}, 'slow');
+					$("div.one").animate({
+						height: '66px'
+					}, 1000, demoMove);
+					$("div.two").animate({
+						height: '50px'
+					}, 'slow', demoMove);
+					$("div.three").animate({
+						height: '80px'
+					}, 500, demoMove);
+					$("div.four").animate({
+						height: '30px'
+					}, 'slow', demoMove);
+					$("div.five").animate({
+						height: '50px'
+					}, 500, demoMove);
+					$("div.six").animate({
+						height: '96px'
+					}, 'slow', demoMove);
+				}
+			}
+			var divs = $("div.demo div");
+			var leftSize = 15;
+			for(var i = 0, le = divs.length; i < le; i++) {
+				$(divs[i]).css({
+					'left': leftSize + 'px'
+				});
+				leftSize += 30;
+			}
+		</script>
+	</body>
+
+</html>

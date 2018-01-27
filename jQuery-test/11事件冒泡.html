@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件冒泡</title>
+		<script src="js/jquery.min.js"></script>
+		<style>
+			body{
+				background: #007DDB;
+			}
+			#content{
+				border: 1px #000000 solid;
+				width: 50%;
+				margin: 100px auto;
+			}
+			span{
+				background: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		body区域--事件冒泡
+		<p>
+			事件冒泡引发的问题：我仅仅是想单击span元素，但是相应的div body的点击事件也被触发了
+		</p>
+		<p>
+			事件冒泡的解决办法：
+			<ul>
+				<li>event.stopPropagation();</li>
+				<li>等价于 return false;</li>
+			</ul>
+		</p>
+		<p>
+			阻止默认行为的方法：(验证表单，验证未通过，阻止表单的提交【默认行为】)
+			<ul>
+				<li>event.preventDefault();</li>
+				<li>等价于：return fslae;</li>
+			</ul>
+		</p>
+		<p>
+			事件捕获：jquery不支持，使用原生javascript
+		</p>
+		<div id="content">
+			div元素
+			<span>span元素</span>
+			div元素
+		</div>
+		body区域
+		<p>表单</p>
+		<form action="../jQuery-test/msg.html" method="post">
+			用户名：<input type="text" id="username" value="" /><br />
+			<input type="submit" value="跳转" id='sub'/>
+		</form>
+		<div id="msg"></div>
+		<script>
+			
+			$("span").click(function(event){
+				/*var msg = $("#msg").html();
+				var txt = msg + '<p>点击了span元素</p>';
+				$("#msg").html(txt);*/
+				alert('控制台输出event');
+				console.log(event);
+				//event.stopPropagation();
+				return false;//和停止事件冒泡方法不同的是，使用该语句，下面的语句将不再执行
+				console.log('return 语句看不到我');
+				
+			});
+			$("#content").click(function(){
+				/*var msg = $("#msg").html();
+				var txt = msg + '<p>点击了div元素</p>';
+				$("#msg").html(txt);*/
+				alert(2);
+			});
+			$("body").click(function(){
+				/*var msg = $("#msg").html();
+				var txt = msg + '<p>点击了body元素</p>';
+				$("#msg").html(txt);*/
+				alert(3);
+			});
+			$("#sub").click(function(event){
+				if($("#username").val()==''){
+					alert("请输入用户名");
+					event.preventDefault();
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>选择器</title>
+		<script src="js/jquery.min.js"></script>
+		<style>
+			div.box{
+				width: 80%;
+				margin: 100px auto;
+			}
+			div.bro{
+				color: #006DCC;
+			}
+			div.bro+p{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<p>css选择器：id选择器、类选择器、标签选择器、通配符、并集选择器（，）、后代选择器（ ）、子代选择器（>）、紧邻选择器（+）</p>
+			<div class="bro">测试紧邻选择器 +,只有紧邻的标签才会变红 ↓</div>
+			<p>紧邻的标签p</p>
+			<p>这是标签p</p>
+		</div>
+		<div class="box">
+			<p>jQuery选择器：基本选择器、层级选择器、过滤选择器、属性选择器</p>
+			<p>基本选择器：id 类 标签 通配符</p>
+			<p>层级选择器：子代 后代 紧邻 兄弟选择器（~）</p>
+			<p>过滤选器：:eq() :gt() :lt() :odd() :event() :first() :last()</p>
+			<p>属性选择器:<br/><img src="imgs/属性选择器.png"/></p>
+
+		</div>
+	</body>
+</html>

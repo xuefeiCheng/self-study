@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>传统js实现Ajax</title>
+		<script>
+			function Ajax() {
+				//声明一个空对象 用于存储XMLHttpRequest对象
+				var xmlHttpReq = null;
+				//				赋值 ie5 ie6 使用的是ActiveXObejct方式引入 该对象
+				//				其他浏览器 XMLHttpRequest 是window的子对象
+				if(window.ActiveXObject) { //如果是ie5 ie6 则执行下面的代码块
+					xmlHttpReq = new ActiveXObject('Microsoft.XMLHTTP');
+				} else if(window.XMLHttpRequest) { //其他浏览器 执行下面的代码块
+					xmlHttpReq = new XMLHttpRequest(); //实例化一个XMLHttpRequest 对象
+				}
+				//实例化成功后 使用open方法 初始化XMLHttpRequest对象
+				if(xmlHttpReq != null) { //如果对象实例化成功 
+					//指定 Http方法和 使用的服务器URL
+					xmlHttpReq.open('GET', 'test.php', true); //async 异步请求 默认就是true
+					xmlHttpReq.onreadystatechange = RequestCallBack; //设置回调函数
+					xmlHttpReq.send(null); //send()方法发送请求，get方式可以不指定参数或者null参数
+				}
+
+				function RequestCallBack() {
+					//在处理响应之前 事件处理器会先检查readtState和HTTP的状态
+					//请求完成加载并响应成功 状态值变化 readtState = 4；Http状态值为200
+					if(xmlHttpReq.readyState == 4) {
+						if(xmlHttpReq.status == 200) {
+							//将xmlHttpReq的responseTest获取到，放置想展示的节点处
+							alert(xmlHttpReq.responseText); //response响应
+							document.getElementById('TextShow').innerHTML = xmlHttpReq.responseText;
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<p>说明：文件夹名称改成英文，否则结果输出有误</p>
+		<p>提示：hbulider仅仅是一个编辑器，需要依赖其他，才可以运行php，可以将项目建在AppServ的www目录下</p>
+		<input type="button" name="submit" id="submit" value="提交" onclick="Ajax()" />
+		<div id="TextShow"></div>
+	</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<button>点击我</button>
+		<a href="#"> 点击</a>
+		<a href="#"> 点击</a>
+		<a href="#"> 点击</a>
+		
+		 <div id="log"></div>
+		 
+		 <button>display event.namespace</button>
+		 <p></p>
+		<script>
+			$("button").click(function(){
+				console.log( event.currentTarget); //<button>点击我</button> 返回 dom 元素对象
+			});
+			$("a").each(function(i){
+				 $(this).bind('click', {index:i}, function(e){
+				 	alert('my index is ' + e.data.index);
+				 });
+			});
+			
+			$(document).bind('mousemove',function(e){
+				$("#log").text("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY);
+   			});
+   			//看不懂 这些都不怎么懂了
+   			$("p").bind("test.something", function(event) {
+   				alert( event.namespace );  });
+   				$("button").click(function(event) {
+   					$("p").trigger("test.something");
+   				});
+		</script>
+	</body>
+</html>

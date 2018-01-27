@@ -1,0 +1,97 @@
+<!-- Created by Barrett at RRPowered.com -->
+<!-- File name index.html -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>动态加载外部文件--换肤</title>
+		<link rel="stylesheet" type="text/css" href="js/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/default.css" id="change" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap/js/bootstrap.js"></script>
+
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row pad-10">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default theme1" rel="css/blue.css">Blue</button>
+					<button type="button" class="btn btn-default theme1" rel="css/yellow.css">Yellow</button>
+					<button type="button" class="btn btn-default theme1" rel="css/default.css">Default</button>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 换肤 <span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a class="bgc" rel="css/blue.css">Blue</a>
+							</li>
+							<li>
+								<a class="bgc" rel="css/yellow.css">Yellow</a>
+							</li>
+							<li>
+								<a class="bgc" rel="css/default.css">Default</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--
+				<div class="theme" rel="css/blue.css">Blue</div>
+				<div class="theme" rel="css/yellow.css">Yellow</div>
+				<div class="theme" rel="css/default.css">Default</div>-->
+			<div class="row pad-10">
+				<div class="menu">Tab1 Tab2 Tab3 Tab4 Tab5</div>
+				<div class="inner">
+					Lorem ipsum dolor sit amet
+				</div>
+				<div class="footer">copyright yoursite 2011</div>
+			</div>
+			<p>注意，css要加在最后面，不然会被层叠掉，css文件引入的顺序应该是，优先级越高的放在后面</p>
+			<p>如图</p>
+			<img src="imgs/css优先级.png" />
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$(".theme").click(function() {
+				var theme = $(this).attr("rel");
+				/*alert(theme);*/
+
+				//方法一替换当前样式
+				/*$("link#change").attr("href",theme);*/
+
+				/*方法二添加样式 到最后*/
+				$("link#change").remove();
+				var css = $("head").children(":last");
+				css.append('<link rel="stylesheet" type="text/css" href="' + theme + '" id="change"/>');
+
+			});
+			$(".bgc").click(function() {
+				var theme = $(this).attr("rel");
+				/*alert(theme);*/
+
+				//方法一替换当前样式
+				/*$("link#change").attr("href",theme);*/
+				/*方法二添加样式 到最后*/
+				$("link#change").remove();
+				var css = $("head").children(":last");
+				css.append('<link rel="stylesheet" type="text/css" href="' + theme + '" id="change"/>');
+			});
+			$(".theme1").click(function() {
+				var theme = $(this).attr("rel");
+				/*alert(theme);*/
+
+				//方法一替换当前样式
+				/*$("link#change").attr("href",theme);*/
+
+				/*方法二添加样式 到最后*/
+				$("link#change").remove();
+				var css = $("head").children(":last");
+				css.append('<link rel="stylesheet" type="text/css" href="' + theme + '" id="change"/>');
+
+			});
+		});
+	</script>
+
+</html>

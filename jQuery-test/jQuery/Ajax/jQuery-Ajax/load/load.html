@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery load方法</title>
+		<script src="../../../js/jquery.min.js"></script>
+	</head>
+	<body>
+		<p>load方法根据是否传入参数，自行判断传递方式。有参数POST，无参数GET</p>
+		<button onclick="load()">load数据</button>
+		<button onclick="loadh()">load h标签</button>
+		<button onclick="loadp()">load p标签</button>
+		<button onclick="loadData1()">load(url [,data] [,callback])</button>
+		<button onclick="loadData2()">load(url [,data] [,callback])</button>
+		<button onclick="loadcall()">load回调参数</button>
+		<div id="msg"></div>
+		<script>
+			function load(){
+				$("#msg").load('test.html');
+			}
+			function loadh(){
+				$("#msg").load('test.html h2');
+			}
+			function loadp(){
+				$("#msg").load('test.html #p1');
+			}
+			function loadData1(){
+				$("#msg").load('test.php',{name:'xuefeicheng'},function(data){
+					alert('传入的数据是:'+data);
+				});
+			}
+			function loadData2(){
+				$("#msg").load('test.php',function(data){
+					alert('返回的数据是:'+data);
+				});
+			}
+			function loadcall(){
+				$("#msg").load('test.html #p1',function(responseText,textStatus,XMLHttpRequest){
+					//responseText 请求返回的内容
+					//textStatus 请求状态：success、error、notmodified、timeout
+					//XMLHttpRequest  XMLHttpRequest对象
+					alert(responseText);alert(textStatus);console.log(XMLHttpRequest);
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery中使用ajax传输超大数据的解决办法</title>
+		<style>
+			*{padding: 0;margin: 0;}
+			div.box{
+				width: 60%;
+				margin: 50px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<p>
+				这篇文章主要介绍了JQuery中使用ajax传输超大数据的解决方法,也就是比较多的数据,超过max_upload_size等设置,
+				本文方法在chrome浏览器下测试通过,需要的朋友可以参考下
+			</p>
+			<p>
+				直接说问题，在使用angularjs封装的http请求，进行异步请求时出现的bug。当传递的参数中的参数value过于庞大时，例如文本1000字以上，就会出现
+				bad request。<br />
+				百度搜索了很多的界面，但是在此问题上不清楚是由于ajax的问题还是后台服务器的问题（使用的是tomcat），所以都进行了检索。<br />
+				最终解决了这个问题，是由于Tomcat的header缓冲区大小不够,只需要在server.xml中增加maxHttpHeaderSize字段即可<br />
+				具体的解决办法是：参照 work-log目录下的 日志1012.doc文件<br />
+				本文想要说明的是，另一种问题，虽然现在我还没有碰到此类问题，暂时只能 copy 别人的言论 。<br />		
+				并且，不能使用angularjs封装的http请求，原因暂时不知。
+			</p>
+			<p>
+				直接说问题，在一个页面用了Jquery(1.6)的Ajax请求，用的post，传递显示的数组有500多条.php端却只能接受到50条左右。刚开始以为是web服务器设置的问题，把，max_upload_size这类的都改了。但是没有效果，后来尝试用max_input_vars这个是新玩艺，刚开始还有点作用。后来，客户的数据超过2000的时候，还是一样，php端还是不能完全接受到ajax发送过来的数据。最后，在国外的一网站上，找到了解决方案。
+在post发送前，将要发送的变量用JSON.stringify处理下，就ok了.JSON.stringify是什么呢？？？请移步这里：<a href="http://www.jb51.net/article/29893.htm">http://www.jb51.net/article/<29893 class="htm">			</29893></a>
+			</p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cn-ZH">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>pagination.js - Mss</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="./style/pagination.css" media="screen">
+
+	</head>
+
+	<body>
+		<div class="eg">
+			<div class="M-box3"></div>
+		</div>
+
+		<!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+		<script src="script/lib/jquery.min.js"></script>
+		<script src="script/jquery.pagination.js"></script>
+		<script>
+			$(function() {
+				$('.M-box3').pagination({
+					pageCount: 50,
+					jump: true,
+					coping: true,
+					homePage: '首页',
+					endPage: '末页',
+					prevContent: '上页',
+					nextContent: '下页',
+					callback:function(api){
+						var data = {
+                            page: api.getCurrent(),
+                            pageCount:  api.getPageCount(),//总页数
+                            say: 'oh'
+                        };
+                       console.log(data);
+                       //操作  请求数据
+                      }
+				});
+				
+
+			});
+		</script>
+	</body>
+
+</html>
+
+
+	<!--<div class="eg">
+		<div class="M-box3"></div>
+	</div>
+</div>
+<script src="../static/js/jquery.pagination.js"></script>
+<script src="../static/js/jquery.js"></script>
+<script>
+			$(function() {
+				$('.M-box3').pagination({
+					pageCount: 50,
+					jump: true,
+					coping: true,
+					homePage: '首页',
+					endPage: '末页',
+					prevContent: '上页',
+					nextContent: '下页',
+					callback:function(api){
+						var data = {
+                            page: api.getCurrent(),
+                            pageCount:  api.getPageCount(),//总页数
+                            say: 'oh'
+                        };
+                       console.log(data);
+                       //操作  请求数据
+                      }
+				});
+				
+
+			});
+		</script>-->

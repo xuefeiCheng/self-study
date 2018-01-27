@@ -1,0 +1,6 @@
+jQuery对Ajax操作进行了封装。
+在jQuery中
+底层方法：$.ajax()
+第2层：	load() 
+		$.get() #.post() //全局函数
+第3层：$.getScript() $.getJson()

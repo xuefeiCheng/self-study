@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全局函数插件</title>
+		<script type="text/javascript" src="../js/jquery.min.js" ></script>
+	</head>
+	<body>
+		<p>使用jquery提供的$.extend()方法编写全局函数插件</p>
+		<input type="text" value=""/>
+		<button onclick="pushltrim()">去掉左侧空格</button>
+		<button onclick="pushrtrim()">去掉右侧空格</button>
+		<script type="text/javascript" src="../js/jQuery.trim.js" ></script>
+		<script>
+			//调用方法：$.函数名(参数);
+			function pushltrim(){
+				console.log($("input").val());
+				console.log($("input").val().trim());	
+				console.log($.ltrim($("input").val()));	
+			}
+			function pushrtrim(){
+				console.log($.rtrim($("input").val()));	
+			}
+		</script>
+	</body>
+</html>

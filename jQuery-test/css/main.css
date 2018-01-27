@@ -1,0 +1,14 @@
+body{
+font-family:"arial";
+}
+.dropdown-menu>li>a.bgc{
+	background-color: #ccc;
+}
+.container{
+margin-left:auto;
+margin-right:auto;
+width:700px;
+}
+.pad-10{
+	padding: 10px;;
+}

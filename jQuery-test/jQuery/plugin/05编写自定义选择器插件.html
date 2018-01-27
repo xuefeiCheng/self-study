@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>编写自定义选择器插件</title>
+		<script type="text/javascript" src="../js/jquery.min.js" ></script>
+		<script type="text/javascript" src="../js/jQuery.selector.js" ></script>
+	</head>
+	<body>
+		<p>between选择器</p>
+		<button onclick="selector()">选择 3到5之间的元素，以0开始</button>
+		<div style="background: #ccc;">0</div>
+		<div style="background: #ccc;">1</div>
+		<div style="background: #ccc;">2</div>
+		<div style="background: #ccc;">3</div>
+		<div style="background: #ccc;">4</div>
+		<div style="background: #ccc;">5</div>	
+		<script>
+			function selector(){
+				$("div:group(3)").css("background",'red');//选择小于2（以0开始）的元素
+				$("div:between(3,5)").css("background",'#4166d0');
+			}
+		</script>
+	</body>
+</html>

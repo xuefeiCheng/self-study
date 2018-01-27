@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+		<style>
+			div.box {
+				width: 80%;
+				margin: 100px auto;
+				background-color: #e2e2e2;
+			}
+			
+			div.comment {
+				width: 80%;
+				margin: 10px auto;
+				background-color: #ccc;
+			}
+			
+			.comment h6 {
+				font-weight: 700;
+				font-size: 14px;
+			}
+			
+			.para {
+				margin-top: 5px;
+				text-indent: 2em;
+				background: #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<p>评论区</p>
+			<label for="name">用户名： </label><input type="text" name="name" id="name" value="" /><br />
+			<label for="txt">评&nbsp;&nbsp;&nbsp;论： </label><input type="text" name="txt" id="txt" value="" /><br />
+			<button onclick="submit()">提交</button>
+			<p>展示区</p>
+			<div id="showbox"></div>
+		</div>
+		<script>
+			function submit() {
+				/*$.get('get1.php', {
+					'name': $("#name").val(),
+					'txt': $("#txt").val()
+				}, function(data, status) {
+					alert(status);
+					$("#showbox").html(data);
+				});*/
+				$("#showbox").load('get1.php?name=' + $("#name").val() + '&txt=' + $("#txt").val(), function(data) {
+					console.log(data);
+				},'html');
+			}
+		</script>
+	</body>
+
+</html>

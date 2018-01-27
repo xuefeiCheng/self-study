@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>右下角弹出广告特效</title>
+		<script src="../jquery-1.11.1.min.js"></script>
+		<style>
+			div.ad{
+				position: fixed;
+				right: 0;
+				bottom: 0;
+				width: 230px;
+				height: 120px;
+				background: url(imgs/ad.jpg);
+			}
+			span.adClose{
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 40px;
+				height: 18px;
+				background: url(imgs/h.jpg);
+			}
+		</style>
+	</head>
+	<body>
+		<!--广告实体-->
+		<div class="ad">
+			<span class="adClose"></span>
+		</div>
+		<script>
+			window.onload = function(){
+				$(".ad")
+                    .slideDown("normal")
+                    .slideUp("slow")
+                    .fadeIn(3000);
+                $(".adClose").click(function(){
+                	$(".ad").fadeOut();
+                })
+                    /*.children("span").click(function () {
+                        $(this).parent().fadeOut();
+                    });*/                   
+			}
+		</script>
+	</body>
+</html>

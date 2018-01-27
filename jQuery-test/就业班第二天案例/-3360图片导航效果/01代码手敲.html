@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>360图片导航样式</title>
+		<script src="../jquery-1.11.1.min.js"></script>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			ol,
+			li,
+			ul,
+			dt,
+			dd {
+				list-style: none;
+			}
+			
+			div.wrapper {
+				width: 752px;
+				border: 1px solid #ccc;
+				padding: 10px 0 0 10px;
+				font-family: arial;
+				overflow: hidden;
+				margin: 100px auto;
+			}
+			
+			div.wrapper li {
+				float: left;
+				position: relative;
+				width: 178px;
+				height: 125px;
+				overflow: hidden;
+				margin: 0 10px 10px 0;
+			}
+			
+			div.wrapper li p {
+				font-size: 14px;
+				text-align: center;
+				width: 100%;
+				height: 25px;
+				line-height: 25px;
+				background-color: #303030;
+				position: absolute;
+				left: 0;
+				bottom: -25px;
+				color: #fff;
+				cursor: pointer;
+			}
+			
+			.wrapper li p {
+				background: url(images/bg.png) no-repeat 5px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--文档结构-->
+		<!--外层容器 -- 列表 -- 是个连接 -- 列表图片和文字说明以及说明图标-->
+		<div class="wrapper">
+			<ul>
+				<li>
+					<a href="http://www.baidu.com">
+						<img src="images/01.JPG"></img>
+						<p>百度一下</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/02.JPG"></img>
+						<p>淘宝</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/03.JPG"></img>
+						<p>新浪</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/04.JPG"></img>
+						<p>网易</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/05.JPG"></img>
+						<p>搜狐</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/06.JPG"></img>
+						<p>腾讯</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/07.JPG"></img>
+						<p>优酷</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)">
+						<img src="images/08.JPG"></img>
+						<p>京东</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		//获得所有的p标签，精灵图
+		$("div.wrapper p").each(function(i, ele) {
+			pos = 25 * i;
+			console.log(pos);
+			$(ele).css('background-position', "5px -" + pos + "px");
+		})
+		//默认 不显示 p
+		//鼠标 悬停 有特效
+		var speed = 338;
+		$('div.wrapper li a').hover(function() {
+			$(this).children("p").stop().animate({
+				"bottom": 0
+			}, speed);
+		}, function() {
+			$(this).children("p").stop().animate({
+				"bottom": -26
+			}, speed);
+		})
+	</script>
+
+</html>

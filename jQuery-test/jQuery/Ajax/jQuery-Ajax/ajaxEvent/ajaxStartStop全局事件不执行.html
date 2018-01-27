@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>ajaxStart和ajaxStop全局事件不执行</title>
+	</head>
+
+	<body>
+		<p>
+			最近一直都在研究【锋利的jQuery】，确实是一本好书，受益匪浅。但由于技术发展及版本更新等原因，里面还是有些坑需要踩的。
+		</p>
+		<p>
+			比如：第六章七节中提到的全局事件ajaxStart、ajaxStop照着案例敲结果并不会执行。
+		</p>
+		<p>
+			在查阅资料后，发现原来在jquery1.9+版本以后，ajax全局事件需绑定到document对象上才能触发。
+		</p>
+		<p>
+			全局事件：.ajaxComplete().ajaxError().ajaxSend().ajaxStart().ajaxStop().ajaxSuccess()
+		</p>
+		<script>
+			
+			// 1.9 以前写法 链式操作风格
+			$("#loading").ajaxStart(function() {
+				$(this).show();
+			}).ajaxStop(function() {
+				$(this).hide();
+			})
+			// 1.9+ 之后写法
+			$(document).ajaxStart(function() {
+				$("#loading").show();
+			}).ajaxStop(function() {
+				$("#loading").hide();
+			})
+
+			// 以上两种简写
+			// 1.9 以前
+			$("#loading").on("ajaxStart ajaxStop", function() {
+				$(this).toggle();
+			})
+			// 1.9+ 以后
+			$(document).on("ajaxStart ajaxStop", function() {
+				$("#loading").toggle();
+			})
+		</script>
+	</body>
+
+</html>

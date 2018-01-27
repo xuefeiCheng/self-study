@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>网页换肤</title>
+		<link rel="stylesheet" type="text/css" href="js/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/default.css" id="change" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src="js/bootstrap/js/bootstrap.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<h2>界面来自本目录下02动态加载外部文件</h2>
+			<h3><a href="https://segmentfault.com/a/1190000006778671">jquery.cookie 介绍</a></h3>
+			<div class="row pad-10">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default theme1" rel="blue">Blue</button>
+					<button type="button" class="btn btn-default theme1" rel="yellow">Yellow</button>
+					<button type="button" class="btn btn-default theme1" rel="default">Default</button>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 换肤(不存入cookie) <span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a class="bgc" rel="css/blue.css">Blue</a>
+							</li>
+							<li>
+								<a class="bgc" rel="css/yellow.css">Yellow</a>
+							</li>
+							<li>
+								<a class="bgc" rel="css/default.css">Default</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row pad-10">
+				<div class="menu">Tab1 Tab2 Tab3 Tab4 Tab5</div>
+				<div class="inner">
+					Lorem ipsum dolor sit amet
+				</div>
+				<div class="footer">copyright yoursite 2011</div>
+			</div>
+			<p>注意，css要加在最后面，不然会被层叠掉，css文件引入的顺序应该是，优先级越高的放在后面</p>
+			<p>如图</p>
+			<img src="imgs/css优先级.png" />
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			var cookie_skin = $.cookie('MySkin');
+			if(cookie_skin){
+				$("#change").attr('href','css/'+cookie_skin+'.css');
+				//cookie保存路径path 为根目录 不设置默认保存到本界面
+				//若设置到别的界面，那么只有那个界面可以使用 ，并且在那个界面定义cookie的前提下
+				//expire cookie保存有效期，单位：天 不设置，默认浏览器关闭为止
+				$.cookie('MySkin',cookie_skin,{path:'/',expires:1});
+			}
+			$(".bgc").click(function() {
+				var theme = $(this).attr("rel");
+				/*alert(theme);*/
+
+				//方法一替换当前样式
+				/*$("link#change").attr("href",theme);*/
+				/*方法二添加样式 到最后*/
+				$("link#change").remove();
+				var css = $("head").children(":last");
+				css.append('<link rel="stylesheet" type="text/css" href="' + theme + '" id="change"/>');
+			});
+			$(".theme1").click(function() {
+				var theme = $(this).attr("rel");
+				$("#change").attr('href','css/'+theme+'.css');
+				//存入cookie 保存1 天
+				$.cookie('MySkin',theme,{path:'/',expires:1});
+
+			});
+		});
+	</script>
+
+</html>

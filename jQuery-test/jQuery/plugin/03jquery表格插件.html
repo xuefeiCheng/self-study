@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>表格隔行换色</title>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.color.js"></script>
+		<style>
+			.odd {
+				background: #ccc;
+			}
+			
+			.even {
+				background: #E2E2E2;
+			}
+			.selected{
+				background: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>表格隔行换色</p>
+		<table border="1">
+			<thead>
+				<tr>
+					<td><input type="checkbox" name="checkAll" /></td>
+					<th>Header</th>
+					<th>Header</th>
+					<th>Header</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" name="checkbox"/></td>
+					<td>Data</td>
+					<td>Data</td>
+					<td>Data</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="checkbox"/></td>
+					<td>Data</td>
+					<td>Data</td>
+					<td>Data</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="checkbox"/></td>
+					<td>Data</td>
+					<td>Data</td>
+					<td>Data</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			$("table").tableStyle();
+			$("table").check();
+		</script>
+	</body>
+
+</html>

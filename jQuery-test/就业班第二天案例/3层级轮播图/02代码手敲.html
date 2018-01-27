@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>层级轮播图</title>
+		<script src="../jquery-1.11.1.min.js"></script>
+		<style>
+			body,div,ul,li,ol,dl,dt,p,dd,img,input,a,span,h1,h2,h3,h4 {
+				padding: 0;
+				margin: 0;
+				border: 0;
+				list-style: none;
+			}
+			div.box{
+				width: 650px;
+				height: 250px;
+				background-color: #ccc;
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			ul li,ol li{
+				float: left;
+			}
+			ul{
+				position: relative;
+				z-index: 1;
+			} 
+			ul>li{
+				position: absolute;
+				top: 0;
+				left: 0;	
+			}
+			ol{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				z-index: 2;
+			}
+			ol li{
+				width: 24px;
+				height: 24px;
+				line-height: 24px;
+				margin: 5px;
+				border: 1px solid #D0E9C6;
+				text-align: center;
+				cursor: pointer;
+				background: url(images/lili.jpg) repeat center center;
+			}
+			ol li.active{
+				padding: 2px;
+				margin-top: -2px;
+				border: 1px solid #D17905;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul>
+				<li style="z-index: 1;"><img src="images/01.jpg" alt="" /></li>
+				<li><img src="images/02.jpg" alt="" /></li>
+				<li><img src="images/03.jpg" alt="" /></li>
+				<li><img src="images/04.jpg" alt="" /></li>
+				<li><img src="images/05.jpg" alt="" /></li>
+			</ul>
+			<ol>
+				<li class="active">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ol>
+		</div>
+		<script>
+			var zIndex = 0;
+			$("div.box>ol>li").mouseenter(function(){
+				zIndex ++;
+				var $index = $(this).index();
+				$(this).addClass('active').siblings().removeClass('active');
+				//显示图片，隐藏图片 图片切换功能
+				/*$("div.box>ul>li").eq($index).show().siblings().hide();*/
+				//特效 切换 图片
+				
+				$("div.box>ul>li").eq($index)
+				.css({
+					"z-index": zIndex,
+                    "left": 650
+				})
+				.animate({
+					"left": 0
+				},'slow');
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<button onclick="timeout()">数3秒，会有什么呢</button>
+	</body>
+	<script>
+		function timeout() {
+			//setTimeout
+			setTimeout(function() {
+				//1000毫秒后 执行的 操作
+				alert("我是3秒之后才出来的哦");
+			}, 3000);
+		}
+	</script>
+
+</html>

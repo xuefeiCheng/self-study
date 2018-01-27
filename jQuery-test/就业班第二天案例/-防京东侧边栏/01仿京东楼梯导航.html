@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>楼梯导航-京东样式</title>
+		<script src="../jquery-1.11.1.min.js"></script>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			ol,
+			ul,
+			li {
+				list-style: none;
+			}
+			
+			.box {
+				width: 1210px;
+				margin: 0 auto;
+			}
+			
+			.slider {
+				position: fixed;
+				top: 20%;
+				left: 50%;
+				/*1210/2 +5 */
+				margin-left: 610px;
+				height: 200px;
+				width: 38px;
+				background-color: #fff;
+				display: none;
+			}
+			
+			.slider ul li,
+			.slider .back {
+				height: 36px;
+				border: 1px solid #DEDEDE;
+				margin-bottom: 5px;
+				font-size: 0;
+				background: url(images/bg.png) no-repeat;
+			}
+			
+			.slider .back {
+				background: url(images/bg.png) no-repeat center bottom;
+			}
+			
+			.slider li:hover,
+			.slider li.current,
+			.slider .back:hover {
+				border: 1px solid #ED5759;
+				background: #FDEEEE;
+				/* 只有冲突的时候才会出现层叠 */
+				/* 背景颜色 背景图片 背景位置 背景平铺  背景固定 */
+				/* css 层叠样式表 */
+				font-size: 12px;
+				color: #ED5759;
+				padding-left: 6px;
+				padding-top: 2px;
+				height: 34px;
+				cursor: pointer;
+			}
+			
+			.slider .back {
+				line-height: 34px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="top"><img src="images/top.png" alt="" /></div>
+			<div class="bar dian"><img src="images/dian.png" /></div>
+			<div class="bar jia"><img src="images/jia.png" /></div>
+			<div class="bar fu"><img src="images/fu.png" /></div>
+			<div class="bar mei"><img src="images/mei.png" /></div>
+			<div class="bar bottom"><img src="images/bottom.png" /></div>
+			<div class="slider">
+				<ul>
+					<li>电脑数码</li>
+					<li>家电通讯</li>
+					<li>服饰精品</li>
+					<li>美容珠宝</li>
+				</ul>
+				<div class="back">返回</div>
+			</div>
+		</div>
+
+	</body>
+	<script>
+		var pos = 0;
+		$("div.slider li").each(function() {
+			$(this).css('background-position', '0 ' + -pos + 'px');
+			pos += 55;
+
+		});
+
+		var $sideBarMenu = $("div.slider li");
+		var $subbnav = $("div.slider");
+
+		//到达相应位置 css样式更改
+		var TOP = 0;
+		// 滚动效果
+		//只有 页面 滚动时 触发该事件
+		$(window).scroll(function() {
+			TOP = $(document).scrollTop();
+
+			if(TOP >= $(".mei").offset().top) {
+				$sideBarMenu.eq(3).addClass("current").siblings().removeClass();
+			} else if(TOP >= $(".fu").offset().top) {
+				$sideBarMenu.eq(2).addClass("current").siblings().removeClass();
+			} else if(TOP >= $(".jia").offset().top) {
+				$sideBarMenu.eq(1).addClass("current").siblings().removeClass();
+			} else if(TOP >= $(".dian").offset().top) {
+				$sideBarMenu.eq(0).addClass("current").siblings().removeClass();
+			} else if(TOP > 0) {
+				$subbnav.fadeIn();
+			} else {
+				$subbnav.fadeOut();
+			}
+		});
+
+		$sideBarMenu.click(function() {
+			$("html,body").stop().animate({
+				// 给具有相同效果的元素添加 共同的样式 jd
+				"scrollTop": $(".bar").eq($(this).index()).offset().top
+			}, 1000);
+		});
+
+
+		$(".back").click(function() {
+			//$(document).scrollTop(0);
+			$("html,body").animate({
+				"scrollTop": 0
+			}, 300); // html,body ?
+		});
+	</script>
+
+</html>

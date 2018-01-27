@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>继承（原型链）</title>
+	</head>
+	<body>
+		<script>
+			function Foo(){};
+			var f1 = new Foo();
+			f1.a = 100;
+			
+			Foo.prototype.a =10;
+			Foo.prototype.b =200;
+			var item;
+			for(item in f1){
+				console.log(item);
+			}
+			var i;
+			//for循环 在函数对象中循环
+			for(i in f1){
+				if(f1.hasOwnProperty(i)){
+					console.log('自身的属性'+i);
+				}else{
+					console.log('继承自原型的属性'+i);
+				}
+			}
+			/*var a=10
+			,fn
+			,bar=function(x){
+				var b=5;
+				fn(x+5);
+			}
+			fn= function(y){
+				var c=5;
+				console.log(y+c);
+			}
+			bar(10);*/
+		</script>
+	</body>
+</html>

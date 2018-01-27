@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>事件对象</title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+	</head>
+
+	<body>
+		<p>
+			事件对象，event。在触发时创建，事件完成后，该事件对象被销毁。
+		</p>
+		<script type="text/javascript">
+			$("body").mousedown(function(event) {
+				alert(event.which);
+			});
+			$(document).keydown(function(event) {
+				if(event.metaKey) {
+					alert("你按下了Meta键!");
+				}
+			});
+			$(function() {
+				//夸界面 调用 cookie
+				var cookie_skin = $.cookie('MySkin');
+				if(cookie_skin) {
+					alert(cookie_skin);
+					//cookie保存路径path 为根目录 不设置默认保存到本界面
+					//若设置到别的界面，那么只有那个界面可以使用 ，并且在那个界面定义cookie的前提下
+					//expire cookie保存有效期，单位：天 不设置，默认浏览器关闭为止
+					$.cookie('MySkin', cookie_skin, {
+						path: '/',
+						expires: 1
+					});
+				}
+			});
+		</script>
+	</body>
+
+</html>

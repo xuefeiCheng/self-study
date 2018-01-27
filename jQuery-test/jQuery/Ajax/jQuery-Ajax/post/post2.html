@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/jquery.min.js" ></script>
+		<style>
+			div.box{
+				width: 80%;
+				margin: 100px auto;
+				background-color: #e2e2e2;
+			}
+			div.comment{
+				width: 80%;
+				margin: 10px auto;
+				background-color: #ccc;
+			}
+			.comment h6 { font-weight:700; font-size:14px;}
+			.para { margin-top:5px; text-indent:2em;background:#ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<p>评论区</p>
+			<label for="name">用户名： </label><input type="text" name="name" id="name" value=""/><br />
+			<label for="txt">评&nbsp;&nbsp;&nbsp;论： </label><input type="text" name="txt" id="txt" value=""/><br />
+			<button onclick="submit()">提交</button>
+			<p>展示区</p>
+			<div id="showbox"></div>
+		</div>
+		<script>
+			function submit(){
+				$.post('post2.php',{
+					'name':$("#name").val(),
+					'txt':$("#txt").val()
+					},function(data,status){
+					alert(status);
+					//需要先将xml返回的数据转换成 html可识别的
+					console.log(data);
+					//输入 name= 1
+					// txt = 1
+					//返回值为 
+					// #document {<comments><comment name="1"><content>1</content></comment></comments>}
+					
+					//根据返回值 处理数据
+					var $name = $(data).find('comment').attr('name');
+					var $txt = $(data).find('comment content').text();
+					var showmag = "<div class='comment'><h6>"+$name+":</h6><p class='para'>"+$txt+"</p></div>";
+					$("#showbox").append(showmag);
+				});
+			}
+		</script>
+	</body>
+</html>
