@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="thisMainPanel" style="height:200px;overflow-y: scroll;border:1px solid #f3f3f3;">
+    <div class="son-panel">我是类容区域-1</div>
+    <div class="son-panel">我是类容区域-2</div>
+    <div class="son-panel">我是类容区域-3</div>
+    <div class="son-panel">我是类容区域-4</div>
+    <div class="son-panel" style="height:160px;">我是类容区域-5</div>
+    <div class="son-panel">我是类容区域-6</div>
+    <div class="son-panel">我是类容区域-7</div>
+    <div class="son-panel">我是类容区域-8</div>
+</div>
+<script>
+	onload = function () {
+  //初始化
+  scrollToLocation();
+};
+function scrollToLocation() {
+  var mainContainer = $('#thisMainPanel'),
+  scrollToContainer = mainContainer.find('.son-panel:last');//滚动到<div id="thisMainPanel">中类名为son-panel的最后一个div处
+  //scrollToContainer = mainContainer.find('.son-panel:eq(5)');//滚动到<div id="thisMainPanel">中类名为son-panel的第六个处
+  //非动画效果
+  mainContainer.scrollTop(
+   scrollToContainer.offset().top - mainContainer.offset().top + mainContainer.scrollTop()
+  );
+  //动画效果
+  /*mainContainer.animate({
+    scrollTop: scrollToContainer.offset().top - mainContainer.offset().top + mainContainer.scrollTop()
+  }, 2000);//2秒滑动到指定位置*/
+}
+</script>
+	</body>
+</html>
